@@ -2,6 +2,7 @@
 from colorama import Fore
 import yaml
 from subprocess import call, PIPE
+from argparse import ArgumentParser
 import sys
 
 OK = Fore.GREEN + ' OK ' + Fore.RESET
@@ -17,21 +18,18 @@ def run_test(cmd):
     return call(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 
 
-def main(settings_file):
-    with open(settings_file) as f:
+def main():
+    args = parser.parse_args()
+
+    with open(args.monitor) as f:
         settings = yaml.load(f)
 
     for service in settings:
         status = run_test(service['exec'])
         print_status(service['host'], service['service'], status)
 
-
-def print_help():
-    print('Usage: shepard <settings>')
-
+parser = ArgumentParser()
+parser.add_argument('monitor', help='yaml file for monitoring defintions')
 
 if __name__ == '__main__':
-    try:
-        main(sys.argv[1])
-    except IndexError:
-        print_help()
+    main()
