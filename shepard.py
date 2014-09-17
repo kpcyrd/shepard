@@ -14,13 +14,14 @@ def print_status(server, service, failure):
     print('%-10s %-20s [%s]' % (server, service, status))
 
 
-def run_test(cmd):
+def run_exec_test(cmd):
     return call(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 
 
 def run_all_tests(services):
     for service in services:
-        status = run_test(service['exec'])
+        if 'exec' in service:
+            status = run_exec_test(service['exec'])
         print_status(service['host'], service['service'], status)
 
 def main():
