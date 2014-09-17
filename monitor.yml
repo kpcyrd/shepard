@@ -4,3 +4,6 @@
 - host:     foo2
   service:  http localhost
   exec:     curl http://localhost/ 2> /dev/null
+- host:     foo3
+  service:  http example.com
+  exec:     curl http://example.com/ 2> /dev/null | grep -qi example
