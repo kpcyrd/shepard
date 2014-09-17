@@ -18,10 +18,16 @@ def run_exec_test(cmd):
     return call(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 
 
+def run_http_test(http):
+    pass
+
+
 def run_all_tests(services):
     for service in services:
         if 'exec' in service:
             status = run_exec_test(service['exec'])
+        elif 'http' in service:
+            status = run_http_test(service['http'])
         print_status(service['host'], service['service'], status)
 
 def main():
