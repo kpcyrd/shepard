@@ -3,11 +3,14 @@ from colorama import Fore
 import yaml
 from subprocess import call, PIPE
 from argparse import ArgumentParser
+import requests
 import sys
 
 OK = Fore.GREEN + ' OK ' + Fore.RESET
 FAIL = Fore.RED + 'FAIL' + Fore.RESET
 
+SUCCESS = 0
+FAILURE = 1
 
 def print_status(server, service, failure):
     status = OK if not failure else FAIL
@@ -19,7 +22,11 @@ def run_exec_test(cmd):
 
 
 def run_http_test(http):
-    pass
+    try:
+        requests.get(http['url'])
+        return SUCCESS
+    except:
+        return FAILURE
 
 
 def run_all_tests(services):
