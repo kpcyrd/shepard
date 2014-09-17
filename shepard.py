@@ -2,7 +2,6 @@
 from colorama import Fore
 import yaml
 from subprocess import call, PIPE
-import subprocess
 import sys
 
 OK = Fore.GREEN + ' OK ' + Fore.RESET
