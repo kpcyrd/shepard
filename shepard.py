@@ -18,15 +18,18 @@ def run_test(cmd):
     return call(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 
 
+def run_all_tests(services):
+    for service in services:
+        status = run_test(service['exec'])
+        print_status(service['host'], service['service'], status)
+
 def main():
     args = parser.parse_args()
 
     with open(args.monitor) as f:
-        settings = yaml.load(f)
+        services = yaml.load(f)
 
-    for service in settings:
-        status = run_test(service['exec'])
-        print_status(service['host'], service['service'], status)
+    run_all_tests(services)
 
 parser = ArgumentParser()
 parser.add_argument('monitor', help='yaml file for monitoring defintions')
