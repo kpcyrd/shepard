@@ -14,7 +14,7 @@ FAILURE = 1
 
 def print_status(server, service, failure):
     status = OK if not failure else FAIL
-    print('%-10s %-20s [%s]' % (server, service, status))
+    print('%-15s %-45s [%s]' % (server, service, status))
 
 
 def run_exec_test(cmd):
