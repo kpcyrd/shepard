@@ -23,7 +23,9 @@ def run_exec_test(cmd):
 
 def run_http_test(http):
     try:
-        requests.get(http['url'])
+        body = requests.get(http['url'])
+        if 'contains' in http and http['contains'] not in body.text:
+            return FAILURE
         return SUCCESS
     except:
         return FAILURE

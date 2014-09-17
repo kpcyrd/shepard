@@ -7,4 +7,6 @@
     url:    http://localhost/
 - host:     foo3
   service:  http example.com
-  exec:     curl http://example.com/ 2> /dev/null | grep -qi example
+  http:
+    url:    http://example.com/
+    contains:   example
