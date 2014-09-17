@@ -1,0 +1,6 @@
+- host:     foo1
+  service:  ping
+  exec:     ping -c1 192.168.9.9
+- host:     foo2
+  service:  http localhost
+  exec:     curl http://localhost/ 2> /dev/null
