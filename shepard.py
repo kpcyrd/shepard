@@ -13,9 +13,13 @@ FAIL = Fore.RED + 'FAIL' + Fore.RESET
 SUCCESS = 0
 FAILURE = 1
 
-def print_status(server, service, failure):
+def print_status_begin(server, service):
+    print('%-15s %-45s' % (server, service), end='', flush=True)
+
+
+def print_status_end(failure):
     status = OK if not failure else FAIL
-    print('%-15s %-45s [%s]' % (server, service, status))
+    print('[%s]' % status)
 
 
 def run_exec_test(cmd):
@@ -34,11 +38,14 @@ def run_http_test(http):
 
 def run_all_tests(services):
     for service in services:
+        print_status_begin(service['host'], service['service'])
+
         if 'exec' in service:
             status = run_exec_test(service['exec'])
         elif 'http' in service:
             status = run_http_test(service['http'])
-        print_status(service['host'], service['service'], status)
+
+        print_status_end(status)
 
 
 def run_all_tests_forever(services, interval):
