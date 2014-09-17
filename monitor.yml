@@ -1,12 +1,14 @@
-- host:     foo1
-  service:  ping
-  exec:     ping -c1 192.168.9.9
-- host:     foo2
-  service:  http localhost
+- host:         foo1
+  service:      ping
+  exec:         ping -c1 192.168.9.9
+
+- host:         foo2
+  service:      http localhost
   http:
-    url:    http://localhost/
-- host:     foo3
-  service:  http example.com
+    url:        http://localhost/
+
+- host:         foo3
+  service:      http example.com
   http:
-    url:    http://example.com/
+    url:        http://example.com/
     contains:   example
