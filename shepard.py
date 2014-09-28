@@ -37,7 +37,9 @@ def run_http_test(http):
 
 
 def run_test(service):
-    if 'exec' in service:
+    if 'not' in service:
+        return not run_test(service['not'])
+    elif 'exec' in service:
         return run_exec_test(service['exec'])
     elif 'http' in service:
         return run_http_test(service['http'])
