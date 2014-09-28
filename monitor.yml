@@ -1,19 +1,19 @@
-- host:         foo1
+- host:         server1
   service:      ping
   exec:         ping -c1 192.168.9.9
 
-- host:         foo2
+- host:         server2
   service:      http localhost
   http:
     url:        http://localhost/
 
-- host:         foo3
+- host:         server3
   service:      http example.com
   http:
     url:        http://example.com/
     contains:   example
 
-- host:         foo3
+- host:         server3
   service:      http example.com not banana
   not:
     http:
