@@ -12,3 +12,10 @@
   http:
     url:        http://example.com/
     contains:   example
+
+- host:         foo3
+  service:      http example.com not banana
+  not:
+    http:
+      url:        http://example.com/
+      contains:   banana

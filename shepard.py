@@ -36,14 +36,20 @@ def run_http_test(http):
         return FAILURE
 
 
+def run_test(service):
+    if 'not' in service:
+        return not run_test(service['not'])
+    elif 'exec' in service:
+        return run_exec_test(service['exec'])
+    elif 'http' in service:
+        return run_http_test(service['http'])
+
+
 def run_all_tests(services):
     for service in services:
         print_status_begin(service['host'], service['service'])
 
-        if 'exec' in service:
-            status = run_exec_test(service['exec'])
-        elif 'http' in service:
-            status = run_http_test(service['http'])
+        status = run_test(service)
 
         print_status_end(status)
 
